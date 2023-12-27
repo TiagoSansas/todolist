@@ -10,14 +10,16 @@ import jakarta.persistence.Table;
 public class Task {
 
   private UUID id;
+  private String name;
   private String description;
   private boolean complete;
 
   public Task() {
   }
 
-  public Task(UUID id, String description, boolean complete) {
+  public Task(UUID id, String name, String description, boolean complete) {
     this.id = id;
+    this.name = name;
     this.description = description;
     this.complete = complete;
   }
@@ -44,6 +46,14 @@ public class Task {
 
   public void setComplete(boolean complete) {
     this.complete = complete;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
 }

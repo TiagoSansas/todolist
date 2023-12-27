@@ -8,4 +8,6 @@ import com.sansasdev.todolist.entities.Task;
 
 public interface TaskRepository extends JpaRepository<Task, UUID> {
 
+  public Task findByName(String name);
+
 }
