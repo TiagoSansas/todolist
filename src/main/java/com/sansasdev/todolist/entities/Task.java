@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_task")
@@ -15,7 +17,11 @@ public class Task {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
+  @Size(min = 10, max = 80, message = "Deve ter entre 3 a 80 caracteres")
+  @NotBlank
   private String name;
+  @Size(min = 3, max = 120, message = "Deve ter entre 3 a 120 caracteres")
+  @NotBlank
   private String description;
   private boolean complete;
 

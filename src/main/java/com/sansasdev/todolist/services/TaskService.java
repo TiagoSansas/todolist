@@ -30,4 +30,10 @@ public class TaskService {
     return task;
 
   }
+
+  @Transactional
+  public Task register(Task task) {
+    return taskRepository.save(task);
+
+  }
 }
