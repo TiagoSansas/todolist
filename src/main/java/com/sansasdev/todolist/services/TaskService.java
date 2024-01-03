@@ -1,5 +1,7 @@
 package com.sansasdev.todolist.services;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,11 @@ public class TaskService {
   }
 
   @Transactional
+  public Task findById(UUID id) {
+    return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não localizada"));
+  }
+
+  @Transactional
   public Task findByName(String name) {
     Task task = taskRepository.findByName(name)
         .orElseThrow(() -> new ResourceNotFoundException("Tarefa não localizada"));
@@ -35,5 +42,14 @@ public class TaskService {
   public Task register(Task task) {
     return taskRepository.save(task);
 
+  }
+
+  @Transactional
+  public Task update(UUID id, Task task) {
+    Task taskUpdate = findById(id);
+    taskUpdate.setName(task.getName());
+    taskUpdate.setDescription(task.getDescription());
+    taskUpdate.setComplete(task.isComplete());
+    return taskRepository.save(taskUpdate);
   }
 }
