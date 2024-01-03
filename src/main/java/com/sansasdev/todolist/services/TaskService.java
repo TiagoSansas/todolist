@@ -52,4 +52,10 @@ public class TaskService {
     taskUpdate.setComplete(task.isComplete());
     return taskRepository.save(taskUpdate);
   }
+
+  @Transactional
+  public void delete(UUID id) {
+    this.findById(id);
+    taskRepository.deleteById(id);
+  }
 }
