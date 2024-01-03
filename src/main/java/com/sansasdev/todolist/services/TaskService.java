@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sansasdev.todolist.entities.Task;
 import com.sansasdev.todolist.repositories.TaskRepository;
+import com.sansasdev.todolist.services.exceptions.ResourceNotFoundException;
 
 import jakarta.transaction.Transactional;
 
@@ -24,7 +25,9 @@ public class TaskService {
 
   @Transactional
   public Task findByName(String name) {
-    Task task = findByName(name);
+    Task task = taskRepository.findByName(name)
+        .orElseThrow(() -> new ResourceNotFoundException("Tarefa não localizada"));
     return task;
+
   }
 }

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class TaskController {
   TaskService taskService;
 
   @GetMapping("/{name}")
-  public ResponseEntity<Task> findByName(String name) {
+  public ResponseEntity<Task> findByName(@PathVariable String name) {
     Task task = taskService.findByName(name);
     return ResponseEntity.ok(task);
   }
@@ -29,5 +30,4 @@ public class TaskController {
     Page<Task> list = taskService.findAll(pageable);
     return ResponseEntity.ok(list);
   }
-
 }
